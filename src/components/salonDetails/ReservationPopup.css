@@ -1,118 +1,118 @@
 :root {
-    --primary-color: #2c3e50;
-    --accent-color: #e76f51;
+  --primary-color: #2c3e50;
+  --accent-color: #e76f51;
 }
 
 .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
 }
 
 .popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #3d3c3c;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1001;
-    width: 90%;
-    max-width: 400px;
-    color: #f8f9fa;
-    font-family: 'Poppins', sans-serif;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #3d3c3c;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+  width: 90%;
+  max-width: 400px;
+  color: #f8f9fa;
+  font-family: "Poppins", sans-serif;
 }
 
 .popup h3 {
-    color: #f8f9fa;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center;
+  color: #f8f9fa;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
 }
 
 .popup p {
-    color: #e0e0e0;
-    margin-bottom: 1.5rem;
-    text-align: center;
+  color: #e0e0e0;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .popup input[type="email"] {
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1.5rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    background: #4a4a4a;
-    color: #f8f9fa;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: #4a4a4a;
+  color: #f8f9fa;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
 .popup input[type="email"]:focus {
-    outline: none;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(231, 111, 81, 0.2);
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(231, 111, 81, 0.2);
 }
 
 .popup-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
 }
 
 .popup button {
-    background-color: var(--accent-color);
-    color: white;
-    padding: 1rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .popup button:hover {
-    background-color: #d45d3f;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #d45d3f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .popup button:last-child {
-    background-color: #4a4a4a;
-    color: #f8f9fa;
+  background-color: #4a4a4a;
+  color: #f8f9fa;
 }
 
 .popup button:last-child:hover {
-    background-color: #5a5a5a;
+  background-color: #5a5a5a;
 }
 
 /* Styl dla potwierdzonej rezerwacji */
 .popup h3:has(+ button) {
-    color: var(--accent-color);
-    margin-bottom: 2rem;
+  color: var(--accent-color);
+  margin-bottom: 2rem;
 }
 
 @media (max-width: 768px) {
-    .popup {
-        padding: 1.5rem;
-    }
+  .popup {
+    padding: 1.5rem;
+  }
 
-    .popup-buttons {
-        flex-direction: column;
-    }
+  .popup-buttons {
+    flex-direction: column;
+  }
 
-    .popup button {
-        width: 100%;
-    }
+  .popup button {
+    width: 100%;
+  }
 }

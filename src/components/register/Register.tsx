@@ -24,51 +24,51 @@ const Register = () => {
   };
 
   return (
-      <div className="register-container">
-        <div className="register-card">
-          <h2 className="register-title">Create Account</h2>
-          <form onSubmit={handleSubmit} className="register-form">
-            <div className="input-group">
-              <FiMail className="input-icon" />
-              <input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-              />
-            </div>
-            <div className="input-group">
-              <FiUser className="input-icon" />
-              <input
-                  type="text"
-                  placeholder="Full Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-              />
-            </div>
-            <div className="input-group">
-              <FiLock className="input-icon" />
-              <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  minLength={5}
-                  maxLength={20}
-                  required
-              />
-            </div>
-            <button type="submit" className="register-button">
-              Sign Up
-            </button>
-          </form>
-          <p className="login-link">
-            Already have an account? <a href="/login">Log in</a>
-          </p>
-        </div>
+    <div className="register-container">
+      <div className="register-card">
+        <h2 className="register-title">Create Account</h2>
+        <form onSubmit={handleSubmit} className="register-form">
+          <div className="input-group">
+            <FiMail className="input-icon" />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <FiUser className="input-icon" />
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <FiLock className="input-icon" />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              minLength={5}
+              maxLength={20}
+              required
+            />
+          </div>
+          <button type="submit" className="register-button">
+            Sign Up
+          </button>
+        </form>
+        <p className="login-link">
+          Already have an account? <a href="/login">Log in</a>
+        </p>
       </div>
+    </div>
   );
 };
 

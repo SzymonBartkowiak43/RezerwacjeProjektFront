@@ -2,11 +2,10 @@ import axios from "axios";
 
 const baseURL = "http://localhost:8080";
 
-
 export const getUserReservations = async (email: string, token: string) => {
   const response = await axios.get(`${baseURL}/reservations`, {
     params: { email },
-    headers: { Authorization: `Bearer ${token}` }
+    headers: { Authorization: `Bearer ${token}` },
   });
   return response.data;
 };
@@ -22,13 +21,13 @@ export const deleteReservation = (id: string, email: string, token: string) => {
   });
 };
 
-
 export const updateReservation = (data: any) => {
   return axios.patch(`${baseURL}/reservation`, data);
 };
 
-
 export const getNearest5Reservations = async (reservationId: string) => {
-  const response = await axios.get(`${baseURL}/reservation/${reservationId}/nearest`);
+  const response = await axios.get(
+    `${baseURL}/reservation/${reservationId}/nearest`
+  );
   return response.data;
 };

@@ -1,166 +1,165 @@
 :root {
-    --primary-color: #2c3e50;
-    --accent-color: #e76f51;
+  --primary-color: #2c3e50;
+  --accent-color: #e76f51;
 }
 
 /* Główny kontener strony */
 .salon-details {
-    max-width: 1200px;
-    margin: 100px auto 2rem;
-    padding: 2rem;
-    background: #3d3c3c;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Wyśrodkowanie tekstu */
+  max-width: 1200px;
+  margin: 100px auto 2rem;
+  padding: 2rem;
+  background: #3d3c3c;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Wyśrodkowanie tekstu */
 }
 
 /* Wyśrodkowanie zawartości sekcji (formularze, selektory itd.) */
 .salon-details > div {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 /* Galeria – dodatkowy margines na dole */
 .salon-details .image-gallery {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 /* Nagłówki */
 .salon-details h2 {
-    color: #f8f9fa;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  color: #f8f9fa;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .salon-details h3 {
-    color: #f8f9fa;
-    font-size: 1.25rem;
-    margin: 1.5rem 0 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  color: #f8f9fa;
+  font-size: 1.25rem;
+  margin: 1.5rem 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* Pola formularza (input oraz select) */
 .salon-details input[type="date"],
 .salon-details select {
-    padding: 0.8rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    width: 100%;
-    max-width: 300px;
-    margin: 0.5rem auto; /* Wyśrodkowanie oraz odstęp od góry/dół */
-    display: block;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+  margin: 0.5rem auto; /* Wyśrodkowanie oraz odstęp od góry/dół */
+  display: block;
 }
 
 .salon-details input[type="date"]:focus,
 .salon-details select:focus {
-    outline: none;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(231, 111, 81, 0.2);
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(231, 111, 81, 0.2);
 }
 
 /* Przyciski główne */
 .salon-details button {
-    background-color: var(--accent-color);
-    color: white;
-    padding: 1rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 1rem 0;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 1rem 0;
 }
 
 .salon-details button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .salon-details button:hover:not(:disabled) {
-    background-color: #d45d3f;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #d45d3f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .term-list {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .term-list ul {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    gap: 1rem;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
 }
 
 .term-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
 }
 
-
 .term-list .small-button {
-    background-color: var(--accent-color);
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .term-list .small-button:hover {
-    background-color: #d45d3f;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #d45d3f;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .date-selector,
 .employee-selector,
 .offer-selector {
-    margin: 1.5rem auto;
-    max-width: 300px;
+  margin: 1.5rem auto;
+  max-width: 300px;
 }
 
 @media (max-width: 768px) {
-    .salon-details {
-        margin: 80px 1rem 2rem;
-        padding: 1.5rem;
-    }
+  .salon-details {
+    margin: 80px 1rem 2rem;
+    padding: 1.5rem;
+  }
 
-    .salon-details h2 {
-        font-size: 1.5rem;
-    }
+  .salon-details h2 {
+    font-size: 1.5rem;
+  }
 
-    .salon-details h3 {
-        font-size: 1.1rem;
-    }
+  .salon-details h3 {
+    font-size: 1.1rem;
+  }
 
-    .salon-details input[type="date"],
-    .salon-details select {
-        max-width: 100%;
-    }
+  .salon-details input[type="date"],
+  .salon-details select {
+    max-width: 100%;
+  }
 
-    .term-list li {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
+  .term-list li {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
 }

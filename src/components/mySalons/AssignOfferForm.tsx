@@ -1,64 +1,64 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./AssignOfferForm.css";
 
 interface Offer {
-    id: number;
-    name: string;
+  id: number;
+  name: string;
 }
 
 interface AssignOfferFormProps {
-    employeeId: number;
-    availableOffers: Offer[];
-    onSuccess: () => void;
+  employeeId: number;
+  availableOffers: Offer[];
+  onSuccess: () => void;
 }
 
 const AssignOfferForm: React.FC<AssignOfferFormProps> = ({
-                                                             employeeId,
-                                                             availableOffers,
-                                                             onSuccess,
-                                                         }) => {
-    const [selectedOfferId, setSelectedOfferId] = useState<number | "">("");
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+  employeeId,
+  availableOffers,
+  onSuccess,
+}) => {
+  const [selectedOfferId, setSelectedOfferId] = useState<number | "">("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-        if (selectedOfferId === "") {
-            setError("Please chose an offer");
-            return;
+    if (selectedOfferId === "") {
+      setError("Please chose an offer");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await axios.patch(
+        "http://localhost:8080/employees/add-offer",
+        {
+          offerId: selectedOfferId,
+          employeeId: employeeId,
         }
+      );
 
-        setLoading(true);
-        setError("");
+      if (response.status === 200) {
+        onSuccess();
+        setSelectedOfferId("");
+      } else {
+        setError("There was a problem when assigning an offer");
+      }
+    } catch (err) {
+      console.error("Error when assigning an offer:", err);
+      setError("This employee is already assigned to this offer!");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        try {
-            const response = await axios.patch(
-                "http://164.90.190.165:8080/employees/add-offer",
-                {
-                    offerId: selectedOfferId,
-                    employeeId: employeeId,
-                }
-            );
-
-            if (response.status === 200) {
-                onSuccess();
-                setSelectedOfferId("");
-            } else {
-                setError("There was a problem when assigning an offer");
-            }
-        } catch (err) {
-            console.error("Error when assigning an offer:", err);
-            setError("This employee is already assigned to this offer!");
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    return (
-        <>
-            <style>{`
+  return (
+    <>
+      <style>{`
         /* AssignOfferForm.css */
 :root {
     --accent-color: #e76f51;
@@ -183,40 +183,36 @@ const AssignOfferForm: React.FC<AssignOfferFormProps> = ({
 }
       `}</style>
 
-            <form onSubmit={handleSubmit} className="assign-offer-form">
-                <div className="form-group">
-                    <label className="form-label">Select offer:</label>
-                    <select
-                        className="form-select"
-                        value={selectedOfferId}
-                        onChange={(e) => setSelectedOfferId(Number(e.target.value))}
-                        disabled={loading}
-                    >
-                        <option value="">-- Select from the list --</option>
-                        {availableOffers.map((offer) => (
-                            <option key={offer.id} value={offer.id}>
-                                {offer.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+      <form onSubmit={handleSubmit} className="assign-offer-form">
+        <div className="form-group">
+          <label className="form-label">Select offer:</label>
+          <select
+            className="form-select"
+            value={selectedOfferId}
+            onChange={(e) => setSelectedOfferId(Number(e.target.value))}
+            disabled={loading}
+          >
+            <option value="">-- Select from the list --</option>
+            {availableOffers.map((offer) => (
+              <option key={offer.id} value={offer.id}>
+                {offer.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
-                <button
-                    type="submit"
-                    className="submit-button"
-                    disabled={loading}
-                >
-                    {loading ? (
-                        <span className="loading-text">Assignment...</span>
-                    ) : (
-                        "Assign offer"
-                    )}
-                </button>
+        <button type="submit" className="submit-button" disabled={loading}>
+          {loading ? (
+            <span className="loading-text">Assignment...</span>
+          ) : (
+            "Assign offer"
+          )}
+        </button>
 
-                {error && <div className="error-message">{error}</div>}
-            </form>
-        </>
-    );
+        {error && <div className="error-message">{error}</div>}
+      </form>
+    </>
+  );
 };
 
 export default AssignOfferForm;

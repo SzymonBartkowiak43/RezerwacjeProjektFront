@@ -18,7 +18,7 @@ const SalonList = () => {
   const [salons, setSalons] = useState<Salon[]>([]);
   const [loading, setLoading] = useState(true);
   const [sortCriteria, setSortCriteria] = useState<"name" | "city" | null>(
-      null
+    null
   );
 
   useEffect(() => {
@@ -36,8 +36,8 @@ const SalonList = () => {
             };
           } catch (error) {
             console.error(
-                `Error fetching images for salon ${salon.id}:`,
-                error
+              `Error fetching images for salon ${salon.id}:`,
+              error
             );
             return { ...salon, imageUrl: null };
           }
@@ -71,36 +71,40 @@ const SalonList = () => {
   }
 
   return (
-      <div className="salon-list">
-        <div className="sort-buttons">
-          <button className="sort1" onClick={() => sortSalons("name")}>
-            Sort by Name
-          </button>
-          <button className="sort1" onClick={() => sortSalons("city")}>
-            Sort by City
-          </button>
-        </div>
-        {salons.length === 0 ? (
-            <p>No salons available.</p>
-        ) : (
-            salons.map((salon) => (
-                <div key={salon.id} className="salon-card">
-                  <h3 className="h3-color">{salon.salonName}</h3>
-                  <p className="salon-city">{salon.city}, {salon.street} {salon.number}</p>
-                  {salon.imageUrl ? (
-                      <img
-                          src={salon.imageUrl}
-                          alt={`${salon.salonName} thumbnail`}
-                          className="salon-image"
-                      />
-                  ) : (
-                      <p>No image available</p>
-                  )}
-                  <Link className="salon-link" to={`/salons/${salon.id}`}>See Details</Link>
-                </div>
-            ))
-        )}
+    <div className="salon-list">
+      <div className="sort-buttons">
+        <button className="sort1" onClick={() => sortSalons("name")}>
+          Sort by Name
+        </button>
+        <button className="sort1" onClick={() => sortSalons("city")}>
+          Sort by City
+        </button>
       </div>
+      {salons.length === 0 ? (
+        <p>No salons available.</p>
+      ) : (
+        salons.map((salon) => (
+          <div key={salon.id} className="salon-card">
+            <h3 className="h3-color">{salon.salonName}</h3>
+            <p className="salon-city">
+              {salon.city}, {salon.street} {salon.number}
+            </p>
+            {salon.imageUrl ? (
+              <img
+                src={salon.imageUrl}
+                alt={`${salon.salonName} thumbnail`}
+                className="salon-image"
+              />
+            ) : (
+              <p>No image available</p>
+            )}
+            <Link className="salon-link" to={`/salons/${salon.id}`}>
+              See Details
+            </Link>
+          </div>
+        ))
+      )}
+    </div>
   );
 };
 
