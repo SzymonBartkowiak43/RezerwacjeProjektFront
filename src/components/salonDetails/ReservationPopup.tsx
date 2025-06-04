@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Term } from "../../models/Term";
 import "./ReservationPopup.css";
+import { useToast } from "../toastContext/ToastContext";
 
 interface ReservationPopupProps {
   term: Term;
@@ -30,6 +31,7 @@ const ReservationPopup: React.FC<ReservationPopupProps> = ({
   const [userEmail, setUserEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const toast = useToast();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -43,7 +45,7 @@ const ReservationPopup: React.FC<ReservationPopupProps> = ({
 
   const handleConfirm = () => {
     if (!userEmail) {
-      alert("Please enter your email.");
+      toast("Please enter your email.");
       return;
     }
 

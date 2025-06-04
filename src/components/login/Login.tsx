@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../Services/userService";
 import "./Login.css";
 import header from "../header/Header";
+import { useToast } from "../toastContext/ToastContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const toast = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +21,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       console.error("Error logging in:", error);
-      alert("Error logging in");
+      toast("Error logging in");
     }
   };
 

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import header from "../header/Header";
+import { useToast } from "../toastContext/ToastContext";
 
 const daysOfWeek = [
   "MONDAY",
@@ -23,7 +24,7 @@ interface OpeningHour {
 function AddOpeningHours() {
   const { salonId } = useParams<{ salonId: string }>();
   const navigate = useNavigate();
-
+  const toast = useToast();
   const [openingHours, setOpeningHours] = useState<OpeningHour[]>(
     daysOfWeek.map((day) => ({
       dayOfWeek: day,
@@ -59,7 +60,7 @@ function AddOpeningHours() {
     });
 
     if (hasInvalidHours) {
-      alert("The closing time must be later than the opening time!");
+      toast("The closing time must be later than the opening time!");
       return;
     }
 

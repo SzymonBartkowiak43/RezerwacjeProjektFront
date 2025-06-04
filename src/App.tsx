@@ -9,28 +9,34 @@ import MySalonsPage from "./components/mySalons/MySalonsPage";
 import SalonDetailsPage from "./components/mySalons/SalonDetailsPage";
 import CreateSalon from "./components/createSalon/CreateSalon";
 import AddOpeningHours from "./components/addOpeningHours/AddOpeningHours";
-import index from "./index.css";
+//import index from "./index.css";
+import { ToastProvider } from "./components/toastContext/ToastContext";
 
 function App() {
   return (
-    <Router>
-      <div className="app-content">
-        <Routes>
-          <Route path="/" element={<SalonList />} />
-          <Route path="/salons/:id" element={<SalonDetails />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/reservations" element={<UserReservation />} />
-          <Route path="/owner/salons" element={<MySalonsPage />} />
-          <Route path="/owner/salon/:salonId" element={<SalonDetailsPage />} />
-          <Route path="/create-salon" element={<CreateSalon />} />
-          <Route
-            path="/add-opening-hours/:salonId"
-            element={<AddOpeningHours />}
-          />
-        </Routes>
-      </div>
-    </Router>
+    <ToastProvider>
+      <Router>
+        <div className="app-content">
+          <Routes>
+            <Route path="/" element={<SalonList />} />
+            <Route path="/salons/:id" element={<SalonDetails />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/reservations" element={<UserReservation />} />
+            <Route path="/owner/salons" element={<MySalonsPage />} />
+            <Route
+              path="/owner/salon/:salonId"
+              element={<SalonDetailsPage />}
+            />
+            <Route path="/create-salon" element={<CreateSalon />} />
+            <Route
+              path="/add-opening-hours/:salonId"
+              element={<AddOpeningHours />}
+            />
+          </Routes>
+        </div>
+      </Router>
+    </ToastProvider>
   );
 }
 

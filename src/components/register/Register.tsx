@@ -4,22 +4,24 @@ import { registerUser } from "../../Services/userService";
 import { FiUser, FiMail, FiLock } from "react-icons/fi";
 import "./Register.css";
 import header from "../header/Header";
+import { useToast } from "../toastContext/ToastContext";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const toast = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await registerUser({ email, name, password });
-      alert("Success registration!");
+      toast("Success registration!");
       navigate("/login/");
     } catch (error) {
       console.error("Error registering user:", error);
-      alert("Error registering user");
+      toast("Error registering user");
     }
   };
 

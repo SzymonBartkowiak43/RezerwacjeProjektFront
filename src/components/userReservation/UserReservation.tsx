@@ -7,6 +7,7 @@ import {
 } from "../../Services/reservationService";
 import "./UserReservation.css";
 import header from "../header/Header";
+import { useToast } from "../toastContext/ToastContext";
 
 const UserReservations = () => {
   const [reservations, setReservations] = useState<any[]>([]);
@@ -14,8 +15,10 @@ const UserReservations = () => {
     null
   );
   const [availableDates, setAvailableDates] = useState<any[]>([]);
+  const [showModal, setShowModal] = useState(false);
   const email = localStorage.getItem("email");
   const token = localStorage.getItem("token");
+  const toast = useToast();
 
   useEffect(() => {
     if (email && token) {
@@ -33,9 +36,9 @@ const UserReservations = () => {
     if (token && email) {
       deleteReservation(id, email, token)
         .then(() => {
-          alert("Reservation deleted successfully.");
+          toast("Reservation deleted successfully.");
           fetchReservations();
-          setSelectedReservation(null);
+          closeModal();
         })
         .catch((error) => console.error("Error deleting reservation:", error));
     }
@@ -51,10 +54,9 @@ const UserReservations = () => {
 
     updateReservation(updatedData)
       .then(() => {
-        alert("Reservation updated successfully.");
+        toast("Reservation updated successfully.");
         fetchReservations();
-        setSelectedReservation(null);
-        setAvailableDates([]);
+        closeModal();
       })
       .catch((error) => console.error("Error updating reservation:", error));
   };
@@ -69,17 +71,27 @@ const UserReservations = () => {
     }
   };
 
+  const openModal = (reservation: any) => {
+    setSelectedReservation(reservation);
+    setAvailableDates([]);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setSelectedReservation(null);
+    setAvailableDates([]);
+    setShowModal(false);
+  };
+
   return (
     <div className="user-reservations">
       <h2>Your Reservations</h2>
 
       {reservations.length > 0 ? (
-        <ul className="reservations-list">
+        <div className="reservations-grid">
           {reservations.map((reservation) => (
-            <li key={reservation.reservationId}>
-              <p>
-                <strong>Salon:</strong> {reservation.salonName}
-              </p>
+            <div key={reservation.reservationId} className="reservation-card">
+              <h3>{reservation.salonName}</h3>
               <p>
                 <strong>Employee:</strong> {reservation.employeeName}
               </p>
@@ -90,73 +102,81 @@ const UserReservations = () => {
                 <strong>Date and Time:</strong>{" "}
                 {new Date(reservation.reservationDateTime).toLocaleString()}
               </p>
-              <button onClick={() => setSelectedReservation(reservation)}>
-                Select
+              <button onClick={() => openModal(reservation)}>
+                View Details
               </button>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>No reservations found.</p>
       )}
 
-      {selectedReservation && (
-        <div className="selected-reservation">
-          <h3>Selected Reservation</h3>
-          <p>
-            <strong>Salon:</strong> {selectedReservation.salonName}
-          </p>
-          <p>
-            <strong>Employee:</strong> {selectedReservation.employeeName}
-          </p>
-          <p>
-            <strong>Service:</strong> {selectedReservation.offerName}
-          </p>
-          <p>
-            <strong>Date and Time:</strong>{" "}
-            {new Date(selectedReservation.reservationDateTime).toLocaleString()}
-          </p>
-
-          <div className="button-group">
-            <button
-              className="change-button"
-              onClick={fetchNearestAvailableDates}
-            >
-              Change Date
+      {/* MODAL */}
+      {showModal && selectedReservation && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeModal}>
+              ×
             </button>
-            <button
-              className="cancel-button"
-              onClick={() =>
-                handleDeleteReservation(selectedReservation.reservationId)
-              }
-            >
-              Cancel Reservation
-            </button>
-          </div>
+            <h3>Reservation Details</h3>
+            <p>
+              <strong>Salon:</strong> {selectedReservation.salonName}
+            </p>
+            <p>
+              <strong>Employee:</strong> {selectedReservation.employeeName}
+            </p>
+            <p>
+              <strong>Service:</strong> {selectedReservation.offerName}
+            </p>
+            <p>
+              <strong>Date and Time:</strong>{" "}
+              {new Date(
+                selectedReservation.reservationDateTime
+              ).toLocaleString()}
+            </p>
 
-          {availableDates.length > 0 && (
-            <div className="available-dates">
-              <h4>Available Dates:</h4>
-              <ul>
-                {availableDates.map((date, index) => (
-                  <li key={index}>
-                    <span>
-                      {date.date} - {date.startServices} to {date.endServices}
-                    </span>
-                    <button
-                      onClick={() =>
-                        handleUpdateReservation(
-                          `${date.date}T${date.startServices}`
-                        )
-                      }
-                    >
-                      Select
-                    </button>
-                  </li>
-                ))}
-              </ul>
+            <div className="button-group">
+              <button
+                className="change-button"
+                onClick={fetchNearestAvailableDates}
+              >
+                Change Date
+              </button>
+              <button
+                className="cancel-button"
+                onClick={() =>
+                  handleDeleteReservation(selectedReservation.reservationId)
+                }
+              >
+                Cancel Reservation
+              </button>
             </div>
-          )}
+
+            {availableDates.length > 0 && (
+              <div className="available-dates">
+                <h4>Available Dates</h4>
+                <div className="available-dates-grid">
+                  {availableDates.map((date, index) => (
+                    <div key={index} className="available-date-card">
+                      <p>
+                        {date.date} — {date.startServices} to {date.endServices}
+                      </p>
+                      <button
+                        onClick={() =>
+                          handleUpdateReservation(
+                            `${date.date}T${date.startServices}`
+                          )
+                        }
+                      >
+                        Select
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>

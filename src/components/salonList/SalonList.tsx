@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./SalonListCSS.css";
 import { getSalons, getSalonImage } from "../../Services/salonService";
-import { Salon } from "../../models/Salon";
 import header from "../header/Header";
 
 interface Salon {
@@ -20,7 +19,6 @@ const SalonList = () => {
   const [sortCriteria, setSortCriteria] = useState<"name" | "city" | null>(
     null
   );
-
   useEffect(() => {
     const fetchSalonsWithImages = async () => {
       try {
@@ -67,42 +65,51 @@ const SalonList = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   return (
     <div className="salon-list">
       <div className="sort-buttons">
-        <button className="sort1" onClick={() => sortSalons("name")}>
+        <button className="sort-btn" onClick={() => sortSalons("name")}>
           Sort by Name
         </button>
-        <button className="sort1" onClick={() => sortSalons("city")}>
+        <button className="sort-btn" onClick={() => sortSalons("city")}>
           Sort by City
         </button>
       </div>
+
       {salons.length === 0 ? (
-        <p>No salons available.</p>
+        <p className="no-salons">No salons available.</p>
       ) : (
-        salons.map((salon) => (
-          <div key={salon.id} className="salon-card">
-            <h3 className="h3-color">{salon.salonName}</h3>
-            <p className="salon-city">
-              {salon.city}, {salon.street} {salon.number}
-            </p>
-            {salon.imageUrl ? (
-              <img
-                src={salon.imageUrl}
-                alt={`${salon.salonName} thumbnail`}
-                className="salon-image"
-              />
-            ) : (
-              <p>No image available</p>
-            )}
-            <Link className="salon-link" to={`/salons/${salon.id}`}>
-              See Details
-            </Link>
-          </div>
-        ))
+        <div className="salon-list-grid">
+          {salons.map((salon) => (
+            <div key={salon.id} className="salon-card-new">
+              {salon.imageUrl ? (
+                <img
+                  src={salon.imageUrl}
+                  alt={`${salon.salonName} thumbnail`}
+                  className="salon-card-img"
+                />
+              ) : (
+                <div className="salon-card-img placeholder-img">
+                  No Image Available
+                </div>
+              )}
+
+              <div className="salon-card-content-new">
+                <h3>{salon.salonName}</h3>
+                <p className="salon-card-address">
+                  {salon.city}, {salon.street} {salon.number}
+                </p>
+
+                <Link className="salon-card-link" to={`/salons/${salon.id}`}>
+                  See Details
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

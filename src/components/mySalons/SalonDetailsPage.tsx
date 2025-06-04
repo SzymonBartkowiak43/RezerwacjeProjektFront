@@ -6,6 +6,7 @@ import "./SalonDetailsPage.css";
 import header from "../header/Header";
 import AddEmployeeForm from "./AddEmployeeForm";
 import AssignOfferForm from "./AssignOfferForm";
+import { useToast } from "../toastContext/ToastContext";
 
 interface Reservation {
   reservationId: number;
@@ -62,6 +63,7 @@ const SalonDetailsPage: React.FC = () => {
   const [offerDuration, setOfferDuration] = useState("");
 
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | "">("");
+  const toast = useToast();
 
   const availableOffers: Offer[] = salon ? salon.offerDto : [];
 

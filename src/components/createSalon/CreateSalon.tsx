@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import header from "../header/Header";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "../toastContext/ToastContext";
 
 function CreateSalon({ email }: { email?: string }) {
   const [salonName, setSalonName] = useState("");
@@ -13,6 +14,7 @@ function CreateSalon({ email }: { email?: string }) {
   const [generatedCode, setGeneratedCode] = useState("");
   const [inputCode, setInputCode] = useState("");
   const navigate = useNavigate();
+  const toast = useToast();
 
   const generateCode = async () => {
     try {
@@ -33,7 +35,7 @@ function CreateSalon({ email }: { email?: string }) {
       window.open(response.data, "_blank");
     } catch (error) {
       console.error("Error while downloading the link:", error);
-      alert("Error fetching code link");
+      toast("Error fetching code link");
     }
   };
 
@@ -41,7 +43,7 @@ function CreateSalon({ email }: { email?: string }) {
     e.preventDefault();
 
     if (!inputCode) {
-      alert("Please enter the code!");
+      toast("Please enter the code!");
       return;
     }
 

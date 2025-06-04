@@ -43,46 +43,41 @@ const withHeader = (
           <div className="header-right">
             {isLoggedIn ? (
               <>
-                {email && (
-                  <div className="user-info">
-                    <span className="user-email">{email}</span>
-                  </div>
-                )}
                 <button
                   className="header-button"
                   onClick={handleCreateSalonClick}
                 >
-                  🏛️ Create Salon
+                  Create Salon
                 </button>
                 <button
                   className="header-button"
                   onClick={handleReservationsClick}
                 >
-                  📅 Reservations
+                  Reservations
                 </button>
                 <button className="header-button" onClick={handleMySalonsClick}>
-                  💈 My Salons
+                  My Salons
                 </button>
                 <button
                   className="header-button logout-button"
                   onClick={handleLogoutClick}
                 >
-                  🚪 Logout
+                  Logout
                 </button>
               </>
             ) : (
               <>
                 <button
-                  className="header-button login-button"
+                  className="header-button accent-button"
                   onClick={handleLoginClick}
                 >
-                  🔑 Login
+                  Login
                 </button>
                 <button
-                  className="header-button login-button"
+                  className="header-button accent-button"
                   onClick={handleRegisterClick}
                 >
-                  📝 Register
+                  Register
                 </button>
               </>
             )}

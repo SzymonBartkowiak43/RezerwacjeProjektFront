@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Header from "../header/Header";
 import "./AddEmployeeForm.css";
+import { useToast } from "../toastContext/ToastContext";
 
 const defaultAvailability = [
   { dayOfWeek: "MONDAY", startTime: "", endTime: "" },
@@ -17,6 +18,7 @@ const AddEmployeeForm = ({ salonId }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [availability, setAvailability] = useState(defaultAvailability);
+  const toast = useToast();
 
   const handleInputChange = (index, field, value) => {
     const newAvailability = [...availability];
@@ -41,14 +43,14 @@ const AddEmployeeForm = ({ salonId }) => {
       );
 
       if (response.status === 200) {
-        alert("Employee added successfully!");
+        toast("Employee added successfully!");
         window.location.reload();
       } else {
-        alert("Error adding employee.");
+        toast("Error adding employee.");
       }
     } catch (error) {
       console.error(error);
-      alert("An error occurred while adding the employee.");
+      toast("An error occurred while adding the employee.");
     }
   };
 

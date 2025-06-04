@@ -17,6 +17,7 @@ import { Term } from "../../models/Term";
 import "./SalonDetailsCSS.css";
 import DateSelector from "./DateSelector";
 import header from "../header/Header";
+import { useToast } from "../toastContext/ToastContext";
 
 const SalonDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -39,6 +40,7 @@ const SalonDetails: React.FC = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   const today = new Date().toISOString().split("T")[0];
+  const toast = useToast();
 
   useEffect(() => {
     setLoadingOffers(true);
@@ -68,7 +70,7 @@ const SalonDetails: React.FC = () => {
 
   const fetchAvailableTerms = () => {
     if (!selectedOfferId || !selectedEmployeeId || !selectedDate) {
-      alert("Please select an offer, an employee, and a date.");
+      toast("Please select an offer, an employee, and a date.");
       return;
     }
 
@@ -96,13 +98,13 @@ const SalonDetails: React.FC = () => {
         setSelectedOfferId(null);
         setSelectedEmployeeId(null);
         setSelectedDate("");
-        alert("Reservation successful!");
+        toast("Reservation successful!");
         setShowPopup(false);
         setSelectedTerm(null);
         window.location.reload();
       })
       .catch(() => {
-        alert("Failed to create reservation.");
+        toast("Failed to create reservation.");
       });
   };
 
